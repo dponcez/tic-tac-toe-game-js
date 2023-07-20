@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset='UTF-8'>
+  <meta name='description' content=''>
+  <meta name='author' content=''>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <!-- Mobile Specific Metas -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel="shortcut icon" href="./fav-icon/favicon.ico" type="image/x-icon">
+  <title>Tic Tac Toe Game</title>
+  <!-- Fonts -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Abel&family=Play&display=swap'>
+  <!-- CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+  <link rel='stylesheet' href='css/main.css'>
+</head>
+<body>
+  <div class='container'>
+    <header class="header">
+      <h1 class="heading">tic tac toe</h1>
+    </header>
+    <div class="game--container">
+      <div class="grid">
+        <button class="box" id="1" data-box="box">1</button>
+        <button class="box" id="2" data-box="box">2</button>
+        <button class="box" id="3" data-box="box">3</button>
+        <button class="box" id="4" data-box="box">4</button>
+        <button class="box" id="5" data-box="box">5</button>
+        <button class="box" id="6" data-box="box">6</button>
+        <button class="box" id="7" data-box="box">7</button>
+        <button class="box" id="8" data-box="box">8</button>
+        <button class="box" id="9" data-box="box">9</button>
+      </div>
+      <div class="button--container">
+        <button class="start" data-start="">start game</button>
+      </div>
+    </div>
+    <section class="section--container" data-container="container">
+      <p class="description">choose your option</p>
+      <div class="select-option">
+        <button class="btn txt" data-user-option="X">X</button>
+        <hr class="line">
+        <button class="btn txt" data-user-option="O">O</button>
+      </div>
+    </section>
+    <div class="modal--container">
+      <div class="close--modal">
+        <p>close</p>
+        <button class="close"><i class="icon fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal">
+        <i class="icon fa-solid fa-thumbs-up"></i>
+        <p class="info">you<span class="win--lose">won</span>!</p>
+      </div>
+    </div>
+  </div>
+  <script src='js/app.js'></script>
+</body>
+</html>
