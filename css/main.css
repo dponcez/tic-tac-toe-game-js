@@ -1,0 +1,234 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+:is(a, h1, p, button, span) {
+  overflow-wrap: break-word;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 0;
+  color: hsl(227, 55%, 12%);
+  background-color: hsl(199, 24%, 92%);
+}
+button:hover {
+  cursor: pointer;
+}
+button:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  color: hsl(199, 24%, 92%);
+  background-color: hsl(227, 55%, 12%);
+  --webkit-font-smoothing: antialised;
+  --moz-osx-font-smoothing: grayscale ;
+}
+
+.container,
+.header,
+.game--container,
+.box,
+.section--container,
+.select--option,
+.close--modal,
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container,
+.game--container,
+.section--container,
+.select--option {
+  flex-direction: column;
+}
+
+.header,
+.txt {
+  text-transform: uppercase;
+}
+
+.alert::first-letter,
+.description::first-letter {
+  text-transform: uppercase;
+}
+
+.start {
+  text-transform: capitalize;
+}
+
+.modal .info,
+.close--modal p {
+  text-transform: capitalize;
+}
+
+.container {
+  height: 100svh;
+  position: relative;
+}
+.container .header {
+  width: 100%;
+}
+.container .header .heading {
+  font-family: "Play", sans-serif;
+  font-size: 2.25rem;
+}
+.container .game--container .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.225rem;
+}
+.container .game--container .grid .box {
+  width: 6rem;
+  height: 6rem;
+  font-size: 1.265625rem;
+  font-weight: 800;
+  color: hsl(199, 24%, 92%);
+  border-radius: 0.175rem;
+  border: 0.5vmin solid transparent;
+  background-color: transparent;
+}
+.container .game--container .grid .box:active {
+  transform: scale(1);
+}
+.container .game--container .grid .box:first-child {
+  border-color: transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent;
+}
+.container .game--container .grid .box:nth-child(2) {
+  border-color: transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
+}
+.container .game--container .grid .box:nth-child(3) {
+  border-color: transparent transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
+}
+.container .game--container .grid .box:nth-child(4) {
+  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent;
+}
+.container .game--container .grid .box:nth-child(5) {
+  border-color: hsl(199, 24%, 92%);
+}
+.container .game--container .grid .box:nth-child(6) {
+  border-color: hsl(199, 24%, 92%) transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
+}
+.container .game--container .grid .box:nth-child(7) {
+  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent transparent;
+}
+.container .game--container .grid .box:nth-child(8) {
+  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent hsl(199, 24%, 92%);
+}
+.container .game--container .grid .box:last-child {
+  border-color: hsl(199, 24%, 92%) transparent transparent hsl(199, 24%, 92%);
+}
+.container .game--container .button--container {
+  -webkit-margin-before: 1.125rem;
+          margin-block-start: 1.125rem;
+}
+.container .game--container .button--container .start {
+  padding-block: 1rem;
+  padding-inline: 1.125rem;
+  font-size: calc(1.125rem + 1vmin);
+  font-family: "Play", sans-serif;
+  font-weight: 800;
+}
+.container .section--container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  background-color: hsl(0, 67%, 51%);
+}
+.container .section--container .description {
+  font-size: 1.51875rem;
+  font-family: "Abel", sans-serif;
+}
+.container .section--container .select--option .line {
+  width: 100%;
+}
+.container .section--container .select--option .btn {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+.container .section--container .select--option .txt {
+  font-size: 1.40625rem;
+  font-family: "Play", sans-serif;
+  font-weight: 600;
+}
+.container .section--container .alert {
+  padding-inline: 1.125rem;
+  position: absolute;
+  bottom: 1.5rem;
+  background-color: hsl(227, 55%, 12%);
+}
+.container .section--container .alert p {
+  font-size: 1.125rem;
+  font-family: "Abel", sans-serif;
+}
+.container .section--container.close {
+  display: none;
+}
+.container .modal--container {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 5rem 50%;
+  place-items: center;
+  width: 95%;
+  height: 50%;
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  background-color: hsl(0, 67%, 51%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.75vmin 0 rgba(14, 21, 47, 0.75);
+}
+.container .modal--container .close--modal {
+  grid-row: 1;
+  grid-column: 2;
+}
+.container .modal--container .close--modal .close {
+  width: 3rem;
+  background-color: transparent;
+}
+.container .modal--container .close--modal .close .icon {
+  font-size: 3rem;
+  color: hsl(199, 24%, 92%);
+}
+.container .modal--container .modal {
+  grid-row: 2;
+  grid-column: 1/-1;
+  width: inherit;
+  gap: 0 0.5rem;
+}
+.container .modal--container .modal .info,
+.container .modal--container .modal .icon {
+  font-size: 4rem;
+}
+.container .modal--container .modal .icon {
+  color: #fdcb6e;
+}
+.container .modal--container.active {
+  display: grid;
+}/*# sourceMappingURL=main.css.map */
