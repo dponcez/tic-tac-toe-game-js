@@ -23,36 +23,39 @@
     </header>
     <div class="game--container">
       <div class="grid">
-        <button class="box" id="1" data-box="box">1</button>
-        <button class="box" id="2" data-box="box">2</button>
-        <button class="box" id="3" data-box="box">3</button>
-        <button class="box" id="4" data-box="box">4</button>
-        <button class="box" id="5" data-box="box">5</button>
-        <button class="box" id="6" data-box="box">6</button>
-        <button class="box" id="7" data-box="box">7</button>
-        <button class="box" id="8" data-box="box">8</button>
-        <button class="box" id="9" data-box="box">9</button>
+        <button class="box" id="0" data-box="box"></button>
+        <button class="box" id="1" data-box="box"></button>
+        <button class="box" id="2" data-box="box"></button>
+        <button class="box" id="3" data-box="box"></button>
+        <button class="box" id="4" data-box="box"></button>
+        <button class="box" id="5" data-box="box"></button>
+        <button class="box" id="6" data-box="box"></button>
+        <button class="box" id="7" data-box="box"></button>
+        <button class="box" id="8" data-box="box"></button>
       </div>
       <div class="button--container">
-        <button class="start" data-start="">start game</button>
+        <button class="game--btn start" data-start="">start game</button>
+        <button class="game--btn reset" data-reset="">reset game</button>
       </div>
     </div>
     <section class="section--container" data-container="container">
       <p class="description">choose your option.</p>
       <div class="select--option">
-        <button class="btn txt" data-user-option="X">X</button>
+        <button class="btn txt" id="X" data-user-option="X">X</button>
         <hr class="line">
-        <button class="btn txt" data-user-option="O">O</button>
+        <button class="btn txt" id="O" data-user-option="O">O</button>
       </div>
     </section>
-    <div class="modal--container">
-      <div class="close--modal">
-        <p>close</p>
-        <button class="close"><i class="icon fa-solid fa-xmark"></i></button>
-      </div>
+    <div class="modal--container" data-modal="modal-container">
       <div class="modal">
-        <i class="icon fa-solid fa-thumbs-up"></i>
-        <p class="info">you <span class="win--lose">won</span>!</p>
+        <div class="close--modal">
+          <p>close</p>
+          <button class="close" data-close-modal="close"><i class="icon fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="info--container">
+          <i class="icon fa-solid fa-thumbs-up" data-icon="icon"></i>
+          <p class="info" data-info="info"> <span class="win--lose" data-check="win-lose"></span>!</p>
+        </div>
       </div>
     </div>
   </div>
