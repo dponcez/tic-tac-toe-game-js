@@ -1,3 +1,20 @@
+:root {
+  /* fonts */
+  --fnt-play: 'Play', sans-serif;
+  --fnt-abel: 'Abel', sans-serif;
+  /* colors */
+  --light-color: hsl(199 24% 92%);
+  --dark-color: hsl(227 55% 12%);
+  --red-color: hsl(360 67% 51%);
+  --box-indicator: hsl(49 19% 84%);
+  /* sizes */
+  --svh: 100svh;
+  --sz: 100%;
+  --box-size: 6rem;
+  --pd: 1.125rem;
+  --rd: .5rem;
+}
+
 *,
 *::before,
 *::after {
@@ -5,31 +22,27 @@
   box-sizing: border-box;
 }
 
+/* reset default options */
 html,
-body {
-  margin: 0;
-}
+body { margin: 0 }
 
 :is(a, h1, p, button, span) {
-  overflow-wrap: break-word;
+  overflow-wrap: break-word
 }
 
 button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: var(--rd);
   border: 0;
-  color: hsl(227, 55%, 12%);
-  background-color: hsl(199, 24%, 92%);
-}
-button:hover {
-  cursor: pointer;
-}
-button:active {
-  transform: scale(0.98);
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  &:hover { cursor: pointer }
+  &:active { transform: scale(.98) }
 }
 
+/* remove animations for people who've turned them off */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -40,21 +53,23 @@ button:active {
     scroll-behavior: auto !important;
   }
 }
+
 body {
-  color: hsl(199, 24%, 92%);
-  background-color: hsl(227, 55%, 12%);
+  color: var(--light-color);
+  background-color: var(--dark-color);
   --webkit-font-smoothing: antialised;
-  --moz-osx-font-smoothing: grayscale ;
+  --moz-osx-font-smoothing: grayscale
 }
 
-.container,
-.header,
-.game--container,
+/* flexbox */
 .box,
-.section--container,
+.header,
+.container,
+.button--container,
+.info--container,
+.game--container,
 .select--option,
-.close--modal,
-.modal {
+.close--modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,172 +78,166 @@ body {
 .container,
 .game--container,
 .section--container,
-.select--option {
-  flex-direction: column;
-}
+.select--option { flex-direction: column; }
 
 .header,
-.txt {
-  text-transform: uppercase;
+.txt { text-transform: uppercase; }
+
+.alert,
+.description {
+  &::first-letter { text-transform: uppercase; }
 }
 
-.alert::first-letter,
-.description::first-letter {
-  text-transform: uppercase;
-}
-
-.start {
-  text-transform: capitalize;
-}
-
-.modal .info,
-.close--modal p {
-  text-transform: capitalize;
-}
+.game--btn { text-transform: capitalize; }
+.info,
+.close--modal p { text-transform: capitalize; }
 
 .container {
-  height: 100svh;
+  height: var(--svh);
   position: relative;
+  .header {
+    width: var(--sz);
+    .heading {
+      font-family: var(--fnt-play);
+      font-size: calc(var(--pd) * 2);
+    }
+  }
+
+  .game--container {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(var(--rd) * .45);
+      .box {
+        width: var(--box-size);
+        height: var(--box-size);
+        font-size: calc(var(--pd) * 4.75);
+        font-weight: 500;
+        color: var(--light-color);
+        border-radius: calc(var(--rd) * .35);
+        border: .5vmin solid var(--light-color);
+        background-color: transparent;
+        &:active { transform: scale(1) }
+        &:first-child,
+        &:nth-child(2),
+        &:nth-child(3) { border-top: none }
+        &:nth-child(3n + 1) { border-left: none }
+        &:nth-child(3n + 3) { border-right: none }
+        &:nth-child(7),
+        &:nth-child(8),
+        &:last-child { border-bottom: none }
+      }
+    }
+
+    .button--container {
+      margin-block-start: calc(var(--pd) * 2.5);
+      position: relative;
+      .game--btn {
+        width: 12rem;
+        padding-block: 1rem;
+        padding-inline: var(--pd);
+        position: absolute;
+        font-size: calc(var(--pd) + 1vmin);
+        font-family: var(--fnt-play);
+        font-weight: 800;
+      }
+      .reset { display: none }
+    }
+  }
+
+  .section--container {
+    display: none;
+    width: var(--sz);
+    height: var(--sz);
+    position: absolute;
+    inset: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--red-color);
+    &.active { 
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+    .description {
+      font-size: calc(var(--pd) * 1.35);
+      font-family: var(--fnt-abel);
+    }
+    .select--option {
+      .line { width: var(--sz) }
+      .btn {
+        width: calc(var(--box-size) * .75);
+        height: calc(var(--box-size) * .75)
+      }
+      .txt {
+        font-size: calc(var(--pd) * 1.25);
+        font-family: var(--fnt-play);
+        font-weight: 600;
+      }
+    }
+
+    .alert {
+      padding-inline: var(--pd);
+      position: absolute;
+      bottom: 1.5rem;
+      background-color: var(--dark-color);
+      & p {
+        font-size: var(--pd);
+        font-family: var(--fnt-abel);
+      }
+    }
+    &.close { display: none }
+  }
+
+  .modal--container {
+    display: none;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    place-items: center;
+    position: absolute;
+    background-color: var(--red-color);
+    
+    .modal {
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      width: calc(var(--sz) * .95);
+      gap: 0;
+      box-shadow: 0 0 .75rem 0 rgba(0, 0, 0, .75);
+      border-radius: var(--rd);
+      .close--modal {
+        grid-column: 2;
+        width: 4.5rem;
+        z-index: 2;
+        .close {
+          width: 3rem;
+          background-color: transparent;
+          & p { font-size: clamp(1vw, 2vw + .75rem, 1rem) }
+          .icon {
+            font-size: clamp(1vw, 2vw + 1rem, 3rem);
+            color: var(--light-color)
+          }
+        }
+      }
+      .info--container {
+        gap: 0 calc(var(--pd) * 2);
+        .info { 
+          font-family: var(--fnt-play);
+          & span {
+            font-family: var(--fnt-abel);
+            text-transform: lowercase;
+          }
+        }
+        .info,
+        .icon { font-size: clamp(5vw, 8vw + 1rem, 12rem) }
+        .icon { color: #fdcb6e }
+      }
+    }
+    &.active { 
+      display: grid;
+      place-content: center;
+      width: var(--sz);
+      height: var(--sz)
+    }
+  }
 }
-.container .header {
-  width: 100%;
-}
-.container .header .heading {
-  font-family: "Play", sans-serif;
-  font-size: 2.25rem;
-}
-.container .game--container .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.225rem;
-}
-.container .game--container .grid .box {
-  width: 6rem;
-  height: 6rem;
-  font-size: 1.265625rem;
-  font-weight: 800;
-  color: hsl(199, 24%, 92%);
-  border-radius: 0.175rem;
-  border: 0.5vmin solid transparent;
-  background-color: transparent;
-}
-.container .game--container .grid .box:active {
-  transform: scale(1);
-}
-.container .game--container .grid .box:first-child {
-  border-color: transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent;
-}
-.container .game--container .grid .box:nth-child(2) {
-  border-color: transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
-}
-.container .game--container .grid .box:nth-child(3) {
-  border-color: transparent transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
-}
-.container .game--container .grid .box:nth-child(4) {
-  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent;
-}
-.container .game--container .grid .box:nth-child(5) {
-  border-color: hsl(199, 24%, 92%);
-}
-.container .game--container .grid .box:nth-child(6) {
-  border-color: hsl(199, 24%, 92%) transparent hsl(199, 24%, 92%) hsl(199, 24%, 92%);
-}
-.container .game--container .grid .box:nth-child(7) {
-  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent transparent;
-}
-.container .game--container .grid .box:nth-child(8) {
-  border-color: hsl(199, 24%, 92%) hsl(199, 24%, 92%) transparent hsl(199, 24%, 92%);
-}
-.container .game--container .grid .box:last-child {
-  border-color: hsl(199, 24%, 92%) transparent transparent hsl(199, 24%, 92%);
-}
-.container .game--container .button--container {
-  -webkit-margin-before: 1.125rem;
-          margin-block-start: 1.125rem;
-}
-.container .game--container .button--container .start {
-  padding-block: 1rem;
-  padding-inline: 1.125rem;
-  font-size: calc(1.125rem + 1vmin);
-  font-family: "Play", sans-serif;
-  font-weight: 800;
-}
-.container .section--container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 50%;
-  transform: translate(-50%, -50%);
-  background-color: hsl(0, 67%, 51%);
-}
-.container .section--container .description {
-  font-size: 1.51875rem;
-  font-family: "Abel", sans-serif;
-}
-.container .section--container .select--option .line {
-  width: 100%;
-}
-.container .section--container .select--option .btn {
-  width: 4.5rem;
-  height: 4.5rem;
-}
-.container .section--container .select--option .txt {
-  font-size: 1.40625rem;
-  font-family: "Play", sans-serif;
-  font-weight: 600;
-}
-.container .section--container .alert {
-  padding-inline: 1.125rem;
-  position: absolute;
-  bottom: 1.5rem;
-  background-color: hsl(227, 55%, 12%);
-}
-.container .section--container .alert p {
-  font-size: 1.125rem;
-  font-family: "Abel", sans-serif;
-}
-.container .section--container.close {
-  display: none;
-}
-.container .modal--container {
-  display: none;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 5rem 50%;
-  place-items: center;
-  width: 95%;
-  height: 50%;
-  position: absolute;
-  inset: 50%;
-  transform: translate(-50%, -50%);
-  background-color: hsl(0, 67%, 51%);
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.75vmin 0 rgba(14, 21, 47, 0.75);
-}
-.container .modal--container .close--modal {
-  grid-row: 1;
-  grid-column: 2;
-}
-.container .modal--container .close--modal .close {
-  width: 3rem;
-  background-color: transparent;
-}
-.container .modal--container .close--modal .close .icon {
-  font-size: 3rem;
-  color: hsl(199, 24%, 92%);
-}
-.container .modal--container .modal {
-  grid-row: 2;
-  grid-column: 1/-1;
-  width: inherit;
-  gap: 0 0.5rem;
-}
-.container .modal--container .modal .info,
-.container .modal--container .modal .icon {
-  font-size: 4rem;
-}
-.container .modal--container .modal .icon {
-  color: #fdcb6e;
-}
-.container .modal--container.active {
-  display: grid;
-}/*# sourceMappingURL=main.css.map */
