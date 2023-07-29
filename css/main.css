@@ -68,7 +68,6 @@ body {
 .button--container,
 .info--container,
 .game--container,
-.select--option,
 .close--modal {
   display: flex;
   align-items: center;
@@ -76,19 +75,11 @@ body {
 }
 
 .container,
-.game--container,
-.section--container,
-.select--option { flex-direction: column; }
+.game--container { flex-direction: column; }
 
-.header,
-.txt { text-transform: uppercase; }
+.heading { text-transform: uppercase; }
 
-.alert,
-.description {
-  &::first-letter { text-transform: uppercase; }
-}
-
-.game--btn { text-transform: capitalize; }
+.game--btn,
 .info,
 .close--modal p { text-transform: capitalize; }
 
@@ -143,49 +134,6 @@ body {
       }
       .reset { display: none }
     }
-  }
-
-  .section--container {
-    display: none;
-    width: var(--sz);
-    height: var(--sz);
-    position: absolute;
-    inset: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--red-color);
-    &.active { 
-      display: flex;
-      align-items: center;
-      justify-content: center
-    }
-    .description {
-      font-size: calc(var(--pd) * 1.35);
-      font-family: var(--fnt-abel);
-    }
-    .select--option {
-      .line { width: var(--sz) }
-      .btn {
-        width: calc(var(--box-size) * .75);
-        height: calc(var(--box-size) * .75)
-      }
-      .txt {
-        font-size: calc(var(--pd) * 1.25);
-        font-family: var(--fnt-play);
-        font-weight: 600;
-      }
-    }
-
-    .alert {
-      padding-inline: var(--pd);
-      position: absolute;
-      bottom: 1.5rem;
-      background-color: var(--dark-color);
-      & p {
-        font-size: var(--pd);
-        font-family: var(--fnt-abel);
-      }
-    }
-    &.close { display: none }
   }
 
   .modal--container {

@@ -1,5 +1,8 @@
 const initGame = () => {
+
   // Create all variables we need for the game
+  const X_USER_OPTION = 'X';
+  const O_USER_OPTION = 'O';
   const winnerCombination = [
     [0, 1, 2],
     [3, 4, 5],
@@ -13,61 +16,33 @@ const initGame = () => {
   let timeout;
   let spaces = [];
   let running = false;
+  let currentPlayer = X_USER_OPTION;
   let boxIndicator = getComputedStyle(document.body).getPropertyValue('--box-indicator');
 
   // Create an object variable called (options)
   const options = {
-    container: document.querySelector('[data-container]'),
     modalContainer: document.querySelector('[data-modal]'),
     startButton: document.querySelector('[data-start]'),
     resetButton: document.querySelector('[data-reset]'),
     closeModalButton: document.querySelector('[data-close-modal]'),
-    info: document.querySelector('[data-info]'),
-    check: document.querySelector('[data-check]'),
-    boxes: document.querySelectorAll('[data-box]'),
-    userButtons: document.querySelectorAll('[data-user-option]'),
-    optionX: document.getElementById('X'),
-    optionO: document.getElementById('O')
+    infoContainer: document.querySelector('[data-info]'),
+    boxes: document.querySelectorAll('[data-box]')
   }
 
   // Destructure the options variable
-  const {startButton, resetButton, closeModalButton, boxes, userButtons, container, modalContainer, info, check, optionX, optionO} = options;
-
-  const X_USER_OPTION = optionX.textContent;
-  const O_USER_OPTION = optionO.textContent;
-  let currentPlayer = X_USER_OPTION || O_USER_OPTION;
-
-  // Create chooseUserOption function: 
-  // the user can choose 'X' or 'O' button to start the game,
-  // when the user has chosen their button the selection option container will close.
-  userButtons.forEach((button) => {
-    const sufix = button.dataset.userOption;
-    
-    const closeOptionBox = () => {
-      timeout = setTimeout(() => {
-        if(!container.classList.contains('close')){
-          container.classList.add('close')
-        }
-      }, 1000)
-    }
-
-    if(sufix === 'X'){
-      button.addEventListener('click', () => {
-        closeOptionBox()
-      })
-    }else if(sufix === 'O'){
-      button.addEventListener('click', () => {
-        closeOptionBox()
-      })
-    }
-  })
+  const {
+    startButton, 
+    resetButton, 
+    closeModalButton, 
+    boxes, 
+    modalContainer, 
+    infoContainer,
+  } = options;
 
   // Create start game function:
   // allow the user to start the current game.
   const startGame = () => {
     if(!running){
-      container.classList.add('active');
-      container.classList.remove('close');
       resetButton.style.display = 'block';
       startButton.style.display = 'none'
     }
@@ -94,7 +69,7 @@ const initGame = () => {
     });
 
     // start with the current player
-    currentPlayer = X_USER_OPTION || O_USER_OPTION
+    currentPlayer = X_USER_OPTION
   }
 
   const closeModal = () => modalContainer.classList.remove('active')
@@ -109,36 +84,44 @@ const initGame = () => {
       e.target.innerText = currentPlayer;
 
       if(checkWinner() !== false){
-        // console.log(`${currentPlayer} wins`);
         showMessage();
-
+        
+        // The code snippet below can be found
+        // at the following link: https://www.youtube.com/watch?v=oZrp3Atkz18&t=1001s
         const winner = checkWinner();
-        winner.map(box => {
+        winner.map((box) => {
           boxes[box].style.backgroundColor = boxIndicator;
           boxes[box].style.color = "hsl(227 55% 12%)";
-        })
+        });
 
-        return
+        return;
       }
 
-      currentPlayer = (currentPlayer === X_USER_OPTION) ? 
-        O_USER_OPTION : 
-        X_USER_OPTION
+      currentPlayer = 
+        (currentPlayer === X_USER_OPTION) ? 
+          O_USER_OPTION : 
+          X_USER_OPTION
     }
   }
 
   const showMessage = () => {
     if(currentPlayer && !running){
-      modalContainer.classList.add('active')
-      info.innerText = `${currentPlayer}'s`
-      check.innerText = ' wins!'
-      info.appendChild(check)
+      modalContainer.classList.add('active');
+
+      const inner = `
+        <i class="icon fa-solid fa-thumbs-up"></i>
+        <p class="info">${currentPlayer} <span class="win--lose">wins</span>!</p>
+      `;
+      infoContainer.innerHTML = inner;
+
       running = false
     }
   }
 
   // Create check winner function:
   // let the user know who wins the game.
+  // The code snippet below can be found
+  // at the following link: https://www.youtube.com/watch?v=oZrp3Atkz18&t=1001s
   const checkWinner = () => {
     for (const condition of winnerCombination) {
       const [a, b, c] = condition;
