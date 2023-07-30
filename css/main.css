@@ -143,7 +143,6 @@ body {
     place-items: center;
     position: absolute;
     background-color: var(--red-color);
-    
     .modal {
       grid-row: 2;
       display: grid;
